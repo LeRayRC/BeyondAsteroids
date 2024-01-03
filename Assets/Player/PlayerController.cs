@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+
+        if(Input.GetButtonDown("Fire2")){
+            ShieldController sc_ = GetComponent<ShieldController>();
+            sc_.RegenerateShield(10.0f);
+        }
         mousePos_ = Input.mousePosition;
         worldPos_ = camera_.ScreenToWorldPoint(mousePos_);
         worldPos_.x = Mathf.Clamp(worldPos_.x, camera_.ViewportToWorldPoint(new Vector2(0.05f,0.0f)).x  , camera_.ViewportToWorldPoint(Vector2.one *0.95f).x);

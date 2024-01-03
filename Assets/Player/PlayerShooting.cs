@@ -79,70 +79,60 @@ public class PlayerShooting : MonoBehaviour
     public void Fire(){
         if(powerUps_.tripleFire){
             if(powerUps_.shotgunFire){
-                InitBullet(rightWeapon_, ship_.transform.up);
-                InitBullet(rightWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(rightWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
 
-                InitBullet(leftWeapon_, ship_.transform.up);
-                InitBullet(leftWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(leftWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(leftWeapon_,bullet_,  ship_.transform.up);
+                InitBullet(leftWeapon_,bullet_,  ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(leftWeapon_,bullet_,  ship_.transform.up,-1.0f * (float)Math.PI / 6);
 
-                InitBullet(centralWeapon_, ship_.transform.up);
-                InitBullet(centralWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(centralWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(centralWeapon_,bullet_,  ship_.transform.up);
+                InitBullet(centralWeapon_,bullet_,  ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(centralWeapon_,bullet_,  ship_.transform.up,-1.0f * (float)Math.PI / 6);
 
             }else{
-                InitBullet(rightWeapon_, ship_.transform.up);
-                InitBullet(leftWeapon_, ship_.transform.up);
-                InitBullet(centralWeapon_, ship_.transform.up);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up);
+                InitBullet(leftWeapon_,bullet_, ship_.transform.up);
+                InitBullet(centralWeapon_,bullet_, ship_.transform.up);
             }
         }
         if(powerUps_.doubleFire){
             if(powerUps_.shotgunFire){
-                InitBullet(rightWeapon_, ship_.transform.up);
-                InitBullet(rightWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(rightWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(rightWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
 
-                InitBullet(leftWeapon_, ship_.transform.up);
-                InitBullet(leftWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(leftWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(leftWeapon_,bullet_, ship_.transform.up);
+                InitBullet(leftWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(leftWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
 
             }else{
-                InitBullet(rightWeapon_,ship_.transform.up);
-                InitBullet(leftWeapon_, ship_.transform.up);
+                InitBullet(rightWeapon_,bullet_ ,ship_.transform.up);
+                InitBullet(leftWeapon_,bullet_  ,ship_.transform.up);
             }
         }else{
             if(powerUps_.shotgunFire){
-                InitBullet(centralWeapon_, ship_.transform.up);
-                InitBullet(centralWeapon_, ship_.transform.up,(float)Math.PI / 6);
-                InitBullet(centralWeapon_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
+                InitBullet(centralWeapon_,bullet_, ship_.transform.up);
+                InitBullet(centralWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6);
+                InitBullet(centralWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6);
             }else{
-                InitBullet(centralWeapon_, ship_.transform.up);
+                InitBullet(centralWeapon_,bullet_, ship_.transform.up);
             }
         }
     }
 
-    public void InitBullet(GameObject prefab, Vector3 bulletDir, float angle = 0.0f){
+    public static void InitBullet(GameObject prefab, GameObject bullet_prefab, Vector3 bulletDir, float angle = 0.0f, float speed=20.0f){
         GameObject go;
         Vector3 newDir = new Vector3();
         newDir.x = bulletDir.x * (float)Math.Cos(angle) - bulletDir.y * (float)Math.Sin(angle);
         newDir.y = bulletDir.x * (float)Math.Sin(angle) + bulletDir.y * (float)Math.Cos(angle);
-        go = Instantiate<GameObject>(bullet_, prefab.transform.position,prefab.transform.rotation);
+        go = Instantiate<GameObject>(bullet_prefab, prefab.transform.position,prefab.transform.rotation);
         go.transform.Rotate(new Vector3(0.0f,0.0f,angle * 180 / (float)Math.PI));
         go.GetComponent<BulletController>().bulletDir_ = newDir;
-        prefab.GetComponent<ParticleSystem>().Play();
-    }
-
-    public void InitBullet(GameObject prefab,float angle){
-        GameObject go;
-        Vector3 bulletDir = new Vector3();
-        bulletDir.x = Mathf.Cos(angle * Mathf.PI / 180.0f);
-        bulletDir.y = Mathf.Sin(angle * Mathf.PI / 180.0f);
-        bulletDir.z = 0.0f;
-        go = Instantiate<GameObject>(bullet_, prefab.transform.position,prefab.transform.rotation);
-        go.transform.Rotate(new Vector3(0.0f,0.0f,angle + 90.0f ));
-        go.GetComponent<BulletController>().bulletDir_ = bulletDir;
-
-        prefab.GetComponent<ParticleSystem>().Play();
+        go.GetComponent<BulletController>().bulletSpeed_ = speed;
+        if(prefab.GetComponent<ParticleSystem>() != null){
+            prefab.GetComponent<ParticleSystem>().Play();
+        }
     }
 }

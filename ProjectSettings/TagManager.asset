@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - Bullet
-  - 
-  - 
-  - 
+  - EnemyBullet
+  - Enemy
+  - Shield
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 1960489503
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
