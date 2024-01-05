@@ -10,7 +10,7 @@ public class ShooterController : MonoBehaviour
 
     public float fireCooldown_;
     public float timeSinceLastFire_;
-
+    public float damage_;
     public float bullet_speed_;
 
     // Start is called before the first frame update
@@ -31,6 +31,8 @@ public class ShooterController : MonoBehaviour
     }
 
     void Fire(){
-        PlayerShooting.InitBullet(gameObject, bulletPrefab_,tr_.up,0.0f,bullet_speed_);
+        GameObject go = PlayerShooting.InitBullet(gameObject, bulletPrefab_,tr_.up,0.0f,bullet_speed_);
+        BulletController bc_ = go.GetComponent<BulletController>();
+        bc_.damage_ = damage_;
     }
 }

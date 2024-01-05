@@ -31,7 +31,7 @@ public class UpdateShieldAmount : MonoBehaviour
             shield_amount_image_.sprite = shield_amount_75_;
         }else if(shield_amount >= 50.0f){
             shield_amount_image_.sprite = shield_amount_50_;
-        }else if(shield_amount >= 0.0f ){
+        }else if(shield_amount > 0.0f ){
             shield_amount_image_.sprite = shield_amount_25_;
         }else {
             shield_amount_image_.sprite = shield_amount_0_;
