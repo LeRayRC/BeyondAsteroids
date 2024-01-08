@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class FollowSpline : MonoBehaviour{
+public class FollowSplineContainer : MonoBehaviour{
     // public List<SplineContainer> splinesToFollow_;
     public SplineContainer spline_;
     // Spline input_spline_;
@@ -18,27 +15,28 @@ public class FollowSpline : MonoBehaviour{
     float3 nearest_point_ = new float3();
     Vector3 nearest_point_vector = new Vector3();
     float nearest_point_t_;
+    int splineIndex_; 
     // Start is called before the first frame update
     void Start(){
         if(spline_ == null){
-            spline_ = GameManager.instance.splineShooter_;
+            spline_ = GameManager.instance.splineOrbit_;
         }
+        speed_ = UnityEngine.Random.Range(3,7);
         percentage_ = 0.0f;
         tr_ = GetComponent<Transform>();
-        legnth_ = spline_.CalculateLength();
-        following_spline = false;
-        SplineUtility.GetNearestPoint<Spline>(spline_.Spline,new float3(tr_.position.x, tr_.position.y, tr_.position.z),out nearest_point_, out nearest_point_t_,8);
+        // Debug.Log(spline_.Splines.Count);
+        splineIndex_ = UnityEngine.Random.Range(0,spline_.Splines.Count);
+        legnth_ = spline_.CalculateLength(splineIndex_);
+        Debug.Log(spline_.Splines.Count + ", " + legnth_ + ", " + splineIndex_);
+        following_spline = true;
+        SplineUtility.GetNearestPoint<Spline>(spline_.Splines[splineIndex_],new float3(tr_.position.x, tr_.position.y, tr_.position.z),out nearest_point_, out nearest_point_t_,8);
         // Debug.Log(nearest_point_);
-        
+
         nearest_point_vector.x = nearest_point_.x + spline_.gameObject.transform.position.x;
         nearest_point_vector.y = nearest_point_.y + spline_.gameObject.transform.position.y;
         nearest_point_vector.z = nearest_point_.z + spline_.gameObject.transform.position.z;
 
-        // input_spline_ = spline_.Spline;
 
-        // Debug.Log(nearest_point_vector);
-
-        
     }
 
     // Update is called once per frame
@@ -55,11 +53,17 @@ public class FollowSpline : MonoBehaviour{
             percentage_ += (speed_ * Time.deltaTime) / legnth_;
             // Debug.Log(percentage_);
             // spline_.
-            Vector3 currentPosition = spline_.EvaluatePosition(percentage_);
+            Vector3 currentPosition = spline_.EvaluatePosition(splineIndex_, percentage_);
             tr_.position = currentPosition;
 
-            if(percentage_ > 1.0f) {percentage_ = 0.0f;}
-
+            if(percentage_ > 1.0f){
+                splineIndex_ = UnityEngine.Random.Range(0,spline_.Splines.Count);
+                legnth_ = spline_.CalculateLength(splineIndex_);
+                percentage_ = 0.0f;
+            }
+            Vector3 lookPosition = spline_.EvaluatePosition(splineIndex_, percentage_ + 0.05f);
+            tr_.up = lookPosition - currentPosition;
+            // tr_.rotation = Quaternion.LookRotation(lookPosition);
             // Debug.Log("Following spline");
         }
     }

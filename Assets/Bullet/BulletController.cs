@@ -30,6 +30,11 @@ public class BulletController : MonoBehaviour
             gec_.TakeDamage(damage_, gameObject);
         }
 
+        if(col.gameObject.layer == LayerMask.NameToLayer("Player")){
+            PlayerController pc_ = col.gameObject.GetComponent<PlayerController>();
+            pc_.TakeDamage(damage_, gameObject);
+        }
+
 
         GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyExplosionParticles_, transform.position, transform.rotation);
         go_.GetComponentInChildren<ParticleSystem>().Play();

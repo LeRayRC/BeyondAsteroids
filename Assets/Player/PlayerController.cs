@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     // Start is called before the first frame update
     public Camera camera_;
@@ -69,5 +69,10 @@ public class PlayerController : MonoBehaviour
         //     }
 
         //     rb_.velocity = velocity;
+    }
+
+    public void TakeDamage(float damage, GameObject causer){
+        //Set gameover
+        gameObject.SetActive(false);
     }
 }

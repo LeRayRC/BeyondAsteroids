@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Splines;
 public class GameManager : MonoBehaviour{
     public static GameManager instance = null; //Static instance of GameInstance which allows it to be
 
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour{
 
     public List<GameObject> bulletList_;
     public List<MeshRenderer> levelBackgrounds_;
+
+    public SplineContainer splineShooter_;
+    public SplineContainer splineOrbit_;
     public int bulletCount_;
 
     void Awake(){
