@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour{
 
     public SplineContainer splineShooter_;
     public SplineContainer splineOrbit_;
+    public SplineContainer bossMovingSpline_;
+
+    public GameObject enemyShooterPrefab_;
+    public GameObject enemyOrbitPrefab_;
+    public GameObject enemyKamikazePrefab_;
+    public GameObject enemyBossPrefab_;
     public int bulletCount_;
 
     void Awake(){

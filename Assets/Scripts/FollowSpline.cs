@@ -46,7 +46,7 @@ public class FollowSpline : MonoBehaviour{
         if(!following_spline){
             
             if(Vector3.Distance(nearest_point_vector,tr_.position) > 0.1f){
-                tr_.position = Vector3.Lerp(tr_.position, nearest_point_vector,0.1f);
+                tr_.position = Vector3.Lerp(tr_.position, nearest_point_vector,Time.deltaTime);
             }else{
                 following_spline = true;
                 percentage_ = CalculatePercentage(tr_.position);

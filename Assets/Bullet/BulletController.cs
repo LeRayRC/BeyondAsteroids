@@ -25,10 +25,22 @@ public class BulletController : MonoBehaviour
             sc_.TakeDamage(damage_, gameObject);
         }
 
-        if(col.gameObject.layer == LayerMask.NameToLayer("Enemy")){
-            GenericEnemyController gec_ = col.gameObject.GetComponent<GenericEnemyController>();
-            gec_.TakeDamage(damage_, gameObject);
+        if(col.gameObject.layer == LayerMask.NameToLayer("EnemyShield")){
+            BossShieldController bsc_ = col.gameObject.GetComponent<BossShieldController>();
+            bsc_.TakeDamage(damage_, gameObject);
         }
+
+        if(col.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+            if(col.gameObject.GetComponent<BossController>() != null){
+                BossController bc_ = col.gameObject.GetComponent<BossController>();
+                bc_.TakeDamage(damage_, gameObject);
+            }else{
+                GenericEnemyController gec_ = col.gameObject.GetComponent<GenericEnemyController>();
+                gec_.TakeDamage(damage_, gameObject);
+            }
+        }
+
+
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Player")){
             PlayerController pc_ = col.gameObject.GetComponent<PlayerController>();

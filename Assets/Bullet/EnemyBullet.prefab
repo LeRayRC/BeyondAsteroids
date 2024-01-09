@@ -186,4 +186,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed_: 20
   bulletDir_: {x: 0, y: 0, z: 0}
-  lifeTime_: 4
+  lifeTime_: 8
+  damage_: 0

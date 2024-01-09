@@ -44,14 +44,17 @@ public class PlayerController : MonoBehaviour, IDamageable
             
             // rb_.AddForce(forwardDir_ * force_, ForceMode.VelocityChange);
             shipTr_.position = Vector3.Lerp(shipTr_.position,new Vector3(worldPos_.x, worldPos_.y, shipTr_.position.z), 0.01f);
-            propulsion_.Play();
+            var emission = propulsion_.emission;
+            // propulsion_.Play();
+            emission.rateOverTime = 75.0f;
         }else{
             
             // rb_.velocity = new Vector3(rb_.velocity.x - (rb_.velocity.x * 0.99f * Time.deltaTime), rb_.velocity.y - ( rb_.velocity.y * 0.99f * Time.deltaTime),0.0f);
             // if(rb_.velocity.x < 0.0f) rb_.velocity = new Vector3(0.0f, rb_.velocity.y,0.0f);
             // if(rb_.velocity.y < 0.0f) rb_.velocity = new Vector3(rb_.velocity.x, 0.0f,0.0f);
-            // var main = propulsion_.main;
-            propulsion_.Stop();
+            var emission = propulsion_.emission;
+            emission.rateOverTime = 0.0f;
+            // propulsion_.Stop();
 
         }
 
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage, GameObject causer){
         //Set gameover
+        // Debug.Log("Hitted by " + causer.name);
         gameObject.SetActive(false);
     }
 }
