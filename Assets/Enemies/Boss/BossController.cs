@@ -23,6 +23,10 @@ public class BossController : MonoBehaviour, IDamageable
     public float fireCooldown_;
     public float healCooldown_;
 
+    public float minionsTimer_;
+    public float minionsCooldown_;
+    public bool minionsActivated_;
+
     float timeToShoot_;
     float timeToHeal_;
     
@@ -36,6 +40,7 @@ public class BossController : MonoBehaviour, IDamageable
     public Transform tr_;
 
     FollowSplineContainer fsc_;
+    public List<GameObject> minionsList_ = new List<GameObject>();
 
     public GameObject explosionParticles_;
     // Start is called before the first frame update
@@ -51,7 +56,7 @@ public class BossController : MonoBehaviour, IDamageable
         timeToHeal_ = healCooldown_;
         tr_ = GetComponent<Transform>();
         fsc_ = GetComponent<FollowSplineContainer>();
-        // fsc_.following_spline = false;
+        fsc_.spline_ = movingSpline_;
     }
 
     // Update is called once per frame
@@ -92,6 +97,14 @@ public class BossController : MonoBehaviour, IDamageable
             tr_.position = Vector3.Lerp(tr_.position, position,Time.deltaTime);
             // actualPhase_ = Phases.Phases_Shield;
         }
+
+        if(minionsActivated_){
+            minionsTimer_ += Time.deltaTime;
+            if(minionsTimer_ > minionsCooldown_ && minionsList_.Count < 1){
+                minionsTimer_ = 0.0f;
+                ShieldDestroyed();
+            }
+        }
     }
 
     public void TakeDamage(float damage, GameObject causer){
@@ -103,22 +116,32 @@ public class BossController : MonoBehaviour, IDamageable
             GameObject go_ = Instantiate<GameObject>(explosionParticles_, tr_.transform.position, tr_.transform.rotation);
             go_.GetComponent<ParticleSystem>().Play();
             Destroy(go_, go_.GetComponent<ParticleSystem>().main.duration);
-            Destroy(gameObject);
+
+            //Empty list
+            foreach(GameObject go in minionsList_){
+                Destroy(go,0.0f);
+            }
+            Destroy(gameObject,0.1f);
         }
     }
 
+
+
     public void ShieldDestroyed(){
-        Debug.Log("Changing phase");
         //Launch 4 shooters
         actualPhase_ = Phases.Phases_Minions;
         StartCoroutine(SpawnMinions());
+        minionsActivated_ = true;
     }
 
     IEnumerator SpawnMinions(){
         for(int i=0;i<minionSpawnAmount_;i++){
-            GameObject go_ = Instantiate<GameObject>(minionPrefab_, gameObject.transform.position, gameObject.transform.rotation);
+            GameObject go_ = Instantiate<GameObject>(minionPrefab_, gameObject.transform.position, Quaternion.identity);
             FollowSpline fs_ = go_.GetComponent<FollowSpline>();
             fs_.spline_ = minionsSpline_;
+            fs_.custom_t = true;
+            minionsList_.Add(go_);
+            go_.GetComponent<GenericEnemyController>().memberList_ = minionsList_;
             yield return new WaitForSeconds(1.0f);
         }
     }

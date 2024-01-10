@@ -17,6 +17,8 @@ public class FollowSpline : MonoBehaviour{
     Transform tr_;
     float3 nearest_point_ = new float3();
     Vector3 nearest_point_vector = new Vector3();
+    public bool custom_t;
+    public float custom_t_value;
     float nearest_point_t_;
     // Start is called before the first frame update
     void Start(){
@@ -46,7 +48,11 @@ public class FollowSpline : MonoBehaviour{
         if(!following_spline){
             
             if(Vector3.Distance(nearest_point_vector,tr_.position) > 0.1f){
-                tr_.position = Vector3.Lerp(tr_.position, nearest_point_vector,Time.deltaTime);
+                if(custom_t){
+                    tr_.position = Vector3.Lerp(tr_.position, nearest_point_vector,custom_t_value);
+                }else{
+                    tr_.position = Vector3.Lerp(tr_.position, nearest_point_vector,Time.deltaTime);
+                }
             }else{
                 following_spline = true;
                 percentage_ = CalculatePercentage(tr_.position);

@@ -6,19 +6,20 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public class PowerUps{
 
     
-    public bool doubleFire;
-    public bool tripleFire;
-    public bool shotgunFire;
-    public bool laser;
+    public float doubleFire;
+    public float tripleFire;
+    public float shotgunFire;
+    public float laser;
 
     public PowerUps(){
-        doubleFire = false;
-        tripleFire = false;
-        shotgunFire = false;
-        laser = false;
+        doubleFire  = 0.0f;
+        tripleFire  = 0.0f;
+        shotgunFire = 0.0f;
+        laser       = 0.0f;
     }
 }
 
@@ -39,7 +40,9 @@ public class PlayerShooting : MonoBehaviour
 
     public float standardfireCooldown_;
     public float laserFireCooldown_;
-    PowerUps powerUps_ = new PowerUps();
+
+    public float maxPowerUpAmount_;
+    public PowerUps powerUps_ = new PowerUps();
     
     void Start()
     {
@@ -50,19 +53,19 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.F1)){
-            powerUps_.doubleFire = !powerUps_.doubleFire;
+            powerUps_.doubleFire += 10.0f; 
         }
 
         if(Input.GetKeyDown(KeyCode.F2)){
-            powerUps_.tripleFire = !powerUps_.tripleFire;
+            powerUps_.tripleFire += 10.0f; 
         }
 
         if(Input.GetKeyDown(KeyCode.F3)){
-            powerUps_.shotgunFire = !powerUps_.shotgunFire;
+            powerUps_.shotgunFire += 10.0f; 
         }
 
         if(Input.GetKeyDown(KeyCode.F4)){
-            powerUps_.laser = !powerUps_.laser;
+            powerUps_.laser += 10.0f; 
         }
 
         timeSinceLastFire_ += Time.deltaTime;
@@ -72,7 +75,12 @@ public class PlayerShooting : MonoBehaviour
 
         }
 
-        if(powerUps_.laser){
+        if(powerUps_.laser > 0.0f) powerUps_.laser -= Time.deltaTime;
+        if(powerUps_.doubleFire > 0.0f) powerUps_.doubleFire -= Time.deltaTime;
+        if(powerUps_.tripleFire > 0.0f) powerUps_.tripleFire -= Time.deltaTime;
+        if(powerUps_.shotgunFire > 0.0f) powerUps_.shotgunFire -= Time.deltaTime;
+
+        if(powerUps_.laser > 0.0f){
             fireCooldown_ = laserFireCooldown_;
         }else{
             fireCooldown_ = standardfireCooldown_;
@@ -80,8 +88,8 @@ public class PlayerShooting : MonoBehaviour
     }
 
     public void Fire(){
-        if(powerUps_.tripleFire){
-            if(powerUps_.shotgunFire){
+        if(powerUps_.tripleFire > 0.0f){
+            if(powerUps_.shotgunFire > 0.0f){
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up, 0.0f, bulletSpeed_, bulletDamage_);
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6, bulletSpeed_, bulletDamage_);
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6, bulletSpeed_, bulletDamage_);
@@ -100,8 +108,8 @@ public class PlayerShooting : MonoBehaviour
                 InitBullet(centralWeapon_,bullet_, ship_.transform.up,0.0f, bulletSpeed_, bulletDamage_);
             }
         }
-        if(powerUps_.doubleFire){
-            if(powerUps_.shotgunFire){
+        if(powerUps_.doubleFire > 0.0f){
+            if(powerUps_.shotgunFire > 0.0f){
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up,0.0f,bulletSpeed_, bulletDamage_);
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6, bulletSpeed_, bulletDamage_);
                 InitBullet(rightWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6, bulletSpeed_, bulletDamage_);
@@ -115,7 +123,7 @@ public class PlayerShooting : MonoBehaviour
                 InitBullet(leftWeapon_,bullet_  ,ship_.transform.up,0.0f, bulletSpeed_, bulletDamage_);
             }
         }else{
-            if(powerUps_.shotgunFire){
+            if(powerUps_.shotgunFire > 0.0f){
                 InitBullet(centralWeapon_,bullet_, ship_.transform.up,0.0f, bulletSpeed_, bulletDamage_);
                 InitBullet(centralWeapon_,bullet_, ship_.transform.up,(float)Math.PI / 6,bulletSpeed_, bulletDamage_);
                 InitBullet(centralWeapon_,bullet_, ship_.transform.up,-1.0f * (float)Math.PI / 6,bulletSpeed_, bulletDamage_);
@@ -139,6 +147,28 @@ public class PlayerShooting : MonoBehaviour
             prefab.GetComponent<ParticleSystem>().Play();
         }
         return go;
+    }
+
+    public void SetPowerUp(PowerUpsTypes type, float amount){
+        switch (type){
+            case PowerUpsTypes.PowerUpsTypes_DoubleShot:
+                powerUps_.doubleFire += amount;
+                if(powerUps_.doubleFire > maxPowerUpAmount_) powerUps_.doubleFire = maxPowerUpAmount_;
+                break;
+            case PowerUpsTypes.PowerUpsTypes_TripleShot:
+                powerUps_.tripleFire += amount;
+                if(powerUps_.tripleFire > maxPowerUpAmount_) powerUps_.tripleFire = maxPowerUpAmount_;
+                break;
+            case PowerUpsTypes.PowerUpsTypes_ShotgunShot:
+                powerUps_.shotgunFire += amount;
+                if(powerUps_.shotgunFire > maxPowerUpAmount_) powerUps_.shotgunFire = maxPowerUpAmount_;
+                break;
+            case PowerUpsTypes.PowerUpsTypes_Laser:
+                powerUps_.laser += amount;
+                if(powerUps_.laser > maxPowerUpAmount_) powerUps_.laser = maxPowerUpAmount_;
+                break;
+            
+        }
     }
 
 

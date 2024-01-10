@@ -10218,6 +10218,9 @@ MonoBehaviour:
   minionSpawnAmount_: 4
   fireCooldown_: 2
   healCooldown_: 2
+  minionsTimer_: 0
+  minionsCooldown_: 5
+  minionsActivated_: 0
   fireShootsAmount_: 10
   bulletPrefab_: {fileID: 8382350243602742077, guid: 160aea66a34b1b94898189a52ed58da9, type: 3}
   bulletSpeed_: 3

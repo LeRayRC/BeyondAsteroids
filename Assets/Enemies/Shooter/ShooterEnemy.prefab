@@ -4950,6 +4950,8 @@ MonoBehaviour:
   spline_: {fileID: 0}
   speed_: 4
   following_spline: 0
+  custom_t: 0
+  custom_t_value: 0.1
 --- !u!114 &4420555879690843328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4994,6 +4996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health_: 10
+  collisionDamage_: 20
 --- !u!61 &2546579284600301646
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour{
     public GameObject enemyOrbitPrefab_;
     public GameObject enemyKamikazePrefab_;
     public GameObject enemyBossPrefab_;
+    public GameObject powerUpPrefab_;
     public int bulletCount_;
 
     void Awake(){

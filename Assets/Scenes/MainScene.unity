@@ -2122,6 +2122,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.637408, y: 0.31222433}
   m_EdgeRadius: 0
+--- !u!50 &726047581
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726047566}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 100
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &910693553
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,6 +5821,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1216825468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7585607826648796231, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+  m_PrefabInstance: {fileID: 1419394966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1370778729
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,6 +5997,18 @@ PrefabInstance:
       propertyPath: camera_
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 3491087767083351291, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+      propertyPath: invencible_
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649617185444253794, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+      propertyPath: bulletDamage_
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649617185444253794, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+      propertyPath: maxPowerUpAmount_
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5972,18 +6016,51 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1613510373461774816, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
       insertIndex: -1
       addedObject: {fileID: 726047575}
+    - targetCorrespondingSourceObject: {fileID: 1613510373461774816, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 726047581}
+    - targetCorrespondingSourceObject: {fileID: 7585607826648796231, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1446244554}
   m_SourcePrefab: {fileID: 100100000, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
 --- !u!114 &1446244549 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4383687828182355170, guid: 36588383fd0a8134cb4c0739635538df, type: 3}
   m_PrefabInstance: {fileID: 1419394966}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1216825468}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8f660eec4a6dac4fbb6e6069804c681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1446244554
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216825468}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 100
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1734882453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6032,6 +6109,7 @@ MonoBehaviour:
   enemyOrbitPrefab_: {fileID: 391972153160458784, guid: dfb1caed758fe0342bc01fb29a0920f0, type: 3}
   enemyKamikazePrefab_: {fileID: 9151626159500826685, guid: f5dd7ee0fca982b41910d13b3b76520c, type: 3}
   enemyBossPrefab_: {fileID: 4813271435186571552, guid: 8f10a5bc1c726fd4c8516af9a8028385, type: 3}
+  powerUpPrefab_: {fileID: 1377729522502501267, guid: 3852932df5000ef4fbc2e604807f93a8, type: 3}
   bulletCount_: 0
 --- !u!4 &1734882455
 Transform:
@@ -6042,7 +6120,7 @@ Transform:
   m_GameObject: {fileID: 1734882453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 24.7, z: 71.611755}
+  m_LocalPosition: {x: -0.8, y: 19.1, z: 71.611755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6079,8 +6157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda8edac9007883478ae278d42b51054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPhase_: 1
+  currentPhase_: 0
+  powerUpSpawned_: 0
   Phase1:
+    bossPhase_: 0
+    bossSpawned_: 0
     duration: 60
     initDelay_: 2
     enemy_shooter_activated: 1
@@ -6095,6 +6176,8 @@ MonoBehaviour:
     timer_delay_: 0
     timer_duration_: 0
   Phase2:
+    bossPhase_: 0
+    bossSpawned_: 0
     duration: 60
     initDelay_: 2
     enemy_shooter_activated: 1
@@ -6109,12 +6192,14 @@ MonoBehaviour:
     timer_delay_: 0
     timer_duration_: 0
   Phase3:
+    bossPhase_: 0
+    bossSpawned_: 0
     duration: 60
     initDelay_: 0
     enemy_shooter_activated: 1
     enemy_orbit_activated: 1
     enemy_kamikaze_activated: 1
-    shooter_ratio: 2
+    shooter_ratio: 4
     orbit_ratio: 2
     kamikaze_ratio: 4
     timer_shooter_: 0
@@ -6123,8 +6208,10 @@ MonoBehaviour:
     timer_delay_: 0
     timer_duration_: 0
   Phase4:
-    duration: 0
-    initDelay_: 0
+    bossPhase_: 1
+    bossSpawned_: 0
+    duration: 20
+    initDelay_: 5
     enemy_shooter_activated: 0
     enemy_orbit_activated: 0
     enemy_kamikaze_activated: 0

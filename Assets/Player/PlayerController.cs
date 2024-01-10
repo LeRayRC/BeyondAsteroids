@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     Transform shipTr_;
     Rigidbody rb_;
 
+    public bool invencible_;
+
     public float force_;
     public ParticleSystem propulsion_;
     void Start(){
@@ -77,6 +79,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage, GameObject causer){
         //Set gameover
         // Debug.Log("Hitted by " + causer.name);
-        gameObject.SetActive(false);
+        GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyExplosionParticles_, transform.position, transform.rotation);
+        go_.GetComponentInChildren<ParticleSystem>().Play();
+        //Trigger gameover event
+        if(!invencible_){
+            gameObject.SetActive(false);
+        }
     }
 }

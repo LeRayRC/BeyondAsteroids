@@ -43,7 +43,9 @@ public class BulletController : MonoBehaviour
 
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Player")){
+            Debug.Log(col.gameObject.name);
             PlayerController pc_ = col.gameObject.GetComponent<PlayerController>();
+            Debug.Log("Player hitted");
             pc_.TakeDamage(damage_, gameObject);
         }
 
