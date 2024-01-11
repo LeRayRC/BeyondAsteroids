@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EventSystems;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Splines;
 
 public class BossController : MonoBehaviour, IDamageable
@@ -42,6 +44,12 @@ public class BossController : MonoBehaviour, IDamageable
     FollowSplineContainer fsc_;
     public List<GameObject> minionsList_ = new List<GameObject>();
 
+    public delegate void OnDieHeader();
+    public event OnDieHeader BossDead;
+
+    public bool eventDeadTriggered_;
+
+
     public GameObject explosionParticles_;
     // Start is called before the first frame update
     void Start(){
@@ -57,6 +65,9 @@ public class BossController : MonoBehaviour, IDamageable
         tr_ = GetComponent<Transform>();
         fsc_ = GetComponent<FollowSplineContainer>();
         fsc_.spline_ = movingSpline_;
+        eventDeadTriggered_ = false;
+        BossDead += GameManager.instance.gameVictory_.InitVictoryMessage;
+        
     }
 
     // Update is called once per frame
@@ -120,6 +131,10 @@ public class BossController : MonoBehaviour, IDamageable
             //Empty list
             foreach(GameObject go in minionsList_){
                 Destroy(go,0.0f);
+            }
+            if(BossDead != null && !eventDeadTriggered_){
+                eventDeadTriggered_ = true;
+                BossDead();
             }
             Destroy(gameObject,0.1f);
         }

@@ -36,7 +36,7 @@ public class GameDirector : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        // if(GameManager.instance.gamePaused_ ) return;
+        if(GameManager.instance.gamePaused_ ) return;
         switch(currentPhase_){
             case GamePhases.GamePhases_Phase1:
                 //Spawn powerUp al middle

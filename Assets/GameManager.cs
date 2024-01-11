@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour{
     public Canvas creditsCanvas_;
     public Canvas settingsCanvas_;
     public Canvas gameoverCanvas_;
+    public Canvas mainScreenCanvas_;
+
+    public GameVictory gameVictory_;
     
     public int bulletCount_;
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour{
     }
 
     void Start(){
-        Time.timeScale = 0.0f;
+        Time.timeScale = 1.0f;
+        GameManager.instance.gamePaused_ = true;
     }
 }

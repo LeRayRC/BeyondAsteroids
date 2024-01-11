@@ -25,7 +25,7 @@ public class OnGameOver : MonoBehaviour
     //     pc_.PlayerDead -= AutoDestroy;
     // }
     public void AutoDestroyMySelf(){
-        Debug.Log("Destroying");
+        Debug.Log("Destroying self");
         if(this != null){
             Destroy(gameObject,1.0f);
         }
@@ -36,7 +36,7 @@ public class OnGameOver : MonoBehaviour
     }
 
     public void AutoDestroyMySelfInstant(){
-        Debug.Log("Destroying");
+        Debug.Log("Destroying instant");
         if(this != null){
             Destroy(gameObject,0.0f);
         }

@@ -57,7 +57,7 @@ public class BulletController : MonoBehaviour
         go_.GetComponentInChildren<ParticleSystem>().Play();
 
         // Destroy(this.gameObject,1.0f);
-        Destroy(this.gameObject,0.1f);
+        Destroy(this.gameObject,0.0f);
     }
 
     // public void AutoDestroyMySelf(){

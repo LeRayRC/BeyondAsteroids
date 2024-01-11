@@ -52,6 +52,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.instance.gamePaused_ ) return;
         if(Input.GetKeyDown(KeyCode.F1)){
             powerUps_.doubleFire += 10.0f; 
         }
@@ -170,6 +171,13 @@ public class PlayerShooting : MonoBehaviour
                 break;
             
         }
+    }
+
+    public void ResetPowerUps(){
+        powerUps_.doubleFire  = 0.0f;
+        powerUps_.tripleFire  = 0.0f;
+        powerUps_.shotgunFire = 0.0f;
+        powerUps_.laser       = 0.0f;
     }
 
 

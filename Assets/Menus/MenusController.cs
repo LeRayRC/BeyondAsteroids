@@ -60,6 +60,7 @@ public class MenusController : MonoBehaviour
         GameManager.instance.creditsCanvas_.enabled = false;
         GameManager.instance.mainMenuCanvas_.enabled = true;
         GameManager.instance.gameoverCanvas_.enabled = false;
+        GameManager.instance.gamePaused_ = true;
         Time.timeScale = 0.0f;
         // GameManager.ClearDeletableList();
     }
@@ -67,6 +68,9 @@ public class MenusController : MonoBehaviour
     public static void StartGame(){
         // GameManager.ClearDeletableList();
         PlayerController pc_ = GameManager.instance.player_.GetComponent<PlayerController>();
+        pc_.Init();
+        GameManager.instance.player_.GetComponent<PlayerShooting>().ResetPowerUps();
+        GameManager.instance.player_.GetComponentInChildren<ShieldController>().Init();
         pc_.SpawnPlayer();
         // GameManager.instance.player_.GetComponent<PlayerController>().SpawnPlayer();
         GameManager.instance.mainMenuCanvas_.enabled = false;
@@ -78,6 +82,7 @@ public class MenusController : MonoBehaviour
         //Reset director timers
         GameManager.instance.GetComponent<GameDirector>().ResetPhases();
         // GameManager.instance.star
+        GameManager.instance.gamePaused_ = false;
         Time.timeScale = 1.0f;
     }
 

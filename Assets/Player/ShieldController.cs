@@ -15,6 +15,16 @@ public class ShieldController : MonoBehaviour, IDamageable
         shield_active_ = false;
         shield_particles_ = GetComponent<ParticleSystem>();
         UpdateShieldEmissionParticles();
+        
+        shield_particles_.Stop();
+    }
+
+    public void Init(){
+        shield_active_ = false;
+        shield_amount = 0.0f;
+        // shield_particles_ = GetComponent<ParticleSystem>();
+        UpdateShieldEmissionParticles();
+        UpdateScoreUI(shield_amount);
         shield_particles_.Stop();
     }
 

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     Vector3 mousePos_;
     Vector3 worldPos_;
     Vector3 forwardDir_;
+    Vector3 initPos_;
     Transform shipTr_;
     Rigidbody rb_;
 
@@ -23,13 +24,18 @@ public class PlayerController : MonoBehaviour, IDamageable
     public ParticleSystem propulsion_;
     void Start(){
         shipTr_ = gameObject.GetComponent<Transform>();
-        
+        initPos_ = shipTr_.position;
 
+    }
+
+    public void Init(){
+        shipTr_.transform.position = initPos_;
     }
 
     // Update is called once per frame
     void Update()
     {   
+        if(GameManager.instance.gamePaused_) return;
         mousePos_ = Input.mousePosition;
         worldPos_ = camera_.ScreenToWorldPoint(mousePos_);
         worldPos_.x = Mathf.Clamp(worldPos_.x, camera_.ViewportToWorldPoint(new Vector2(0.05f,0.0f)).x  , camera_.ViewportToWorldPoint(Vector2.one *0.95f).x);

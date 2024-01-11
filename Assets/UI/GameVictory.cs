@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameOverMessage : MonoBehaviour
+public class GameVictory : MonoBehaviour
 {
-    public TMP_Text gameOverText_;
+    public TMP_Text victoryText;
     public float animationTime_;
+
+    
         // Start is called before the first frame update
-    PlayerController pc_;
+    // BossController bc_;
     void Start()
     {
-        pc_ = GameManager.instance.player_.GetComponent<PlayerController>();
-        gameOverText_.overrideColorTags = true;
-        pc_.PlayerDead += InitGameOverMessage;
+        // bc_ = GameManager.instance.player_.GetComponent<PlayerController>();
+        victoryText.overrideColorTags = true;
+        // bc_.PlayerDead += InitGameOverMessage;
     }
 
     // Update is called once per frame
@@ -22,27 +24,30 @@ public class GameOverMessage : MonoBehaviour
         
     }
 
-    void InitGameOverMessage(){
+
+    public void InitVictoryMessage(){
         GameManager.instance.gameoverCanvas_.enabled = true;
+        Debug.Log("Started routine");
         StartCoroutine(AnimateGameOverText());
         //Show during 9 seconds
 
     }
 
     IEnumerator AnimateGameOverText(){
-        // Debug.Log("You died");
-        gameOverText_.text = "you died";
+        GameManager.instance.player_.SetActive(false);
+        victoryText.text = "you win";
         float alpha = 0.0f;
         float timer = 0.0f;
         while(alpha <= 1.0f){
             timer += Time.deltaTime;
             alpha = timer/animationTime_;
-            Color new_color = gameOverText_.color;
+            Color new_color = victoryText.color;
             new_color.a = alpha;
-            gameOverText_.color = new_color;
+            victoryText.color = new_color;
             yield return null;
         }
         // GameManager.ClearDeletableList();
+        Debug.Log("Load main menu");
         MenusController.LoadMainMenu();
     }
 }
