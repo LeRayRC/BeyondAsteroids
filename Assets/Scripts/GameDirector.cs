@@ -33,8 +33,10 @@ public class GameDirector : MonoBehaviour
         // currentPhase_ = GamePhases.GamePhases_Phase3;
     }
 
+
     // Update is called once per frame
     void Update(){
+        // if(GameManager.instance.gamePaused_ ) return;
         switch(currentPhase_){
             case GamePhases.GamePhases_Phase1:
                 //Spawn powerUp al middle
@@ -83,6 +85,8 @@ public class GameDirector : MonoBehaviour
 
         pwc_.amount_ = amount;
         pwc_.powerUp_ = type;
+
+        // GameManager.AddDeletableGameObject(go_);
     }
 
     public void RunPhase(PhaseOptions phase){
@@ -93,6 +97,7 @@ public class GameDirector : MonoBehaviour
             if(phase.bossPhase_){
                 if(!phase.bossSpawned_){
                     GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyBossPrefab_, gameObject.transform.position, Quaternion.Euler(new Vector3(0.0f,0.0f,180.0f)));
+                    // GameManager.AddDeletableGameObject(go_);
                     phase.bossSpawned_ = true;
                 }
             }else{
@@ -127,6 +132,7 @@ public class GameDirector : MonoBehaviour
                         }
 
                         GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyShooterPrefab_, spawnPosition_, Quaternion.identity);
+                        // GameManager.AddDeletableGameObject(go_);
                         phase.timer_shooter_ = 0.0f;
                     }
                 }
@@ -136,6 +142,7 @@ public class GameDirector : MonoBehaviour
                     if(phase.timer_orbit_ >= phase.orbit_ratio){
                         //Spawn Orbit
                         GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyOrbitPrefab_, gameObject.transform.position, Quaternion.identity);
+                        // GameManager.AddDeletableGameObject(go_);
                         phase.timer_orbit_ = 0.0f;
                     }
                 }
@@ -145,6 +152,7 @@ public class GameDirector : MonoBehaviour
                     if(phase.timer_kamikaze_ >= phase.kamikaze_ratio){
                         //Spawn Orbit
                         GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyKamikazePrefab_, gameObject.transform.position, Quaternion.identity);
+                        // GameManager.AddDeletableGameObject(go_);
                         phase.timer_kamikaze_ = 0.0f;
                     }
                 }
@@ -188,6 +196,13 @@ public class GameDirector : MonoBehaviour
         phase.timer_kamikaze_   = 0.0f;
         phase.timer_orbit_      = 0.0f;
         phase.timer_shooter_    = 0.0f;
+    }
+
+    public void ResetPhases(){
+        ResetPhase(Phase1);
+        ResetPhase(Phase2);
+        ResetPhase(Phase3);
+        ResetPhase(Phase4);
     }
 }
 

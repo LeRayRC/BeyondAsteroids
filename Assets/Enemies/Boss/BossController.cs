@@ -142,6 +142,7 @@ public class BossController : MonoBehaviour, IDamageable
             fs_.custom_t = true;
             minionsList_.Add(go_);
             go_.GetComponent<GenericEnemyController>().memberList_ = minionsList_;
+            // GameManager.AddDeletableGameObject(go_);
             yield return new WaitForSeconds(1.0f);
         }
     }

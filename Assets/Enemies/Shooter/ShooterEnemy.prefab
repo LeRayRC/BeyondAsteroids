@@ -4846,6 +4846,7 @@ GameObject:
   - component: {fileID: 5075774520830029423}
   - component: {fileID: 4678721871805914793}
   - component: {fileID: 2546579284600301646}
+  - component: {fileID: 8607883277356970320}
   m_Layer: 8
   m_Name: ShooterEnemy
   m_TagString: Untagged
@@ -4997,6 +4998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health_: 10
   collisionDamage_: 20
+  memberList_: []
 --- !u!61 &2546579284600301646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5042,6 +5044,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42206293, y: 0.41376483}
   m_EdgeRadius: 0
+--- !u!114 &8607883277356970320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130998622793568298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe32ef3488d19844853bc31468ffcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7715550508793608958
 GameObject:
   m_ObjectHideFlags: 0

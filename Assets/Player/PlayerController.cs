@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     Transform shipTr_;
     Rigidbody rb_;
 
+    public delegate void OnDieHeader();
+    public event OnDieHeader PlayerDead;
+    public event OnDieHeader PlayerSpawned;
+
     public bool invencible_;
 
     public float force_;
@@ -76,6 +80,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         //     rb_.velocity = velocity;
     }
 
+    public void SpawnPlayer(){
+        if(PlayerSpawned != null){
+            PlayerSpawned();
+        }
+    }
     public void TakeDamage(float damage, GameObject causer){
         //Set gameover
         // Debug.Log("Hitted by " + causer.name);
@@ -84,6 +93,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         //Trigger gameover event
         if(!invencible_){
             gameObject.SetActive(false);
+            // Time.timeScale = 0.0f;
+            PlayerDead();
+            // GameManager.ClearDeletableList();
+
         }
     }
 }

@@ -10121,6 +10121,7 @@ GameObject:
   - component: {fileID: 8066662299358130504}
   - component: {fileID: 571287343365033463}
   - component: {fileID: 2751350435718212504}
+  - component: {fileID: 215045891307742989}
   m_Layer: 8
   m_Name: Nairan - Dreadnought - Base
   m_TagString: Untagged
@@ -10227,6 +10228,7 @@ MonoBehaviour:
   bulletDamage_: 30
   movingSpline_: {fileID: 0}
   tr_: {fileID: 0}
+  minionsList_: []
   explosionParticles_: {fileID: 8902677336563354174, guid: d6c3c37b25782144292ff1667d8b0aad, type: 3}
 --- !u!61 &571287343365033463
 BoxCollider2D:
@@ -10288,6 +10290,18 @@ MonoBehaviour:
   spline_: {fileID: 0}
   speed_: 2
   following_spline: 0
+--- !u!114 &215045891307742989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813271435186571552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe32ef3488d19844853bc31468ffcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6021682776906995958
 GameObject:
   m_ObjectHideFlags: 0

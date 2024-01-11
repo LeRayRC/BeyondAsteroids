@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour{
     public GameObject player_;
     public GameObject enemyExplosionParticles_;
 
-    public List<GameObject> bulletList_;
     public List<MeshRenderer> levelBackgrounds_;
 
     public SplineContainer splineShooter_;
@@ -26,7 +25,16 @@ public class GameManager : MonoBehaviour{
     public GameObject enemyKamikazePrefab_;
     public GameObject enemyBossPrefab_;
     public GameObject powerUpPrefab_;
+
+    public Canvas mainMenuCanvas_;
+    public Canvas creditsCanvas_;
+    public Canvas settingsCanvas_;
+    public Canvas gameoverCanvas_;
+    
     public int bulletCount_;
+
+    public bool gamePaused_;
+    
 
     void Awake(){
         //Check if instance already exists
@@ -37,5 +45,9 @@ public class GameManager : MonoBehaviour{
         }
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start(){
+        Time.timeScale = 0.0f;
     }
 }

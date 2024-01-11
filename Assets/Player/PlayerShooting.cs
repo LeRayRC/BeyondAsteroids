@@ -146,6 +146,7 @@ public class PlayerShooting : MonoBehaviour
         if(prefab.GetComponent<ParticleSystem>() != null){
             prefab.GetComponent<ParticleSystem>().Play();
         }
+        // GameManager.AddDeletableGameObject(go);
         return go;
     }
 

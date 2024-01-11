@@ -9674,6 +9674,7 @@ GameObject:
   - component: {fileID: 6235702457945393118}
   - component: {fileID: 7316779621572628905}
   - component: {fileID: 6370333907052820298}
+  - component: {fileID: 607772735786602669}
   m_Layer: 8
   m_Name: Kamikaze
   m_TagString: Untagged
@@ -9792,6 +9793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health_: 15
   collisionDamage_: 40
+  memberList_: []
 --- !u!61 &6370333907052820298
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9837,3 +9839,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34740496, y: 0.38960272}
   m_EdgeRadius: 0
+--- !u!114 &607772735786602669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151626159500826685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe32ef3488d19844853bc31468ffcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

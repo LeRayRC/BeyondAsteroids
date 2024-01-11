@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 627882663716450907}
   - component: {fileID: 4038387950499758685}
   - component: {fileID: -1461723662388860007}
+  - component: {fileID: -5154167896769017900}
   m_Layer: 12
   m_Name: PowerUp
   m_TagString: Untagged
@@ -4957,3 +4958,15 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_SortAtRoot: 0
+--- !u!114 &-5154167896769017900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377729522502501267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe32ef3488d19844853bc31468ffcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

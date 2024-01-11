@@ -12,6 +12,8 @@ public class BulletController : MonoBehaviour
     
     void Start(){
         Destroy(this.gameObject,lifeTime_);
+        // GameManager.instance.player_.GetComponent<PlayerController>().PlayerDead += AutoDestroyMySelf;
+        
     }
     // Update is called once per frame
     void Update()
@@ -43,6 +45,7 @@ public class BulletController : MonoBehaviour
 
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Player")){
+            // Destroy(gameObject.GetComponent<OnGameOver>(),0.0f);
             Debug.Log(col.gameObject.name);
             PlayerController pc_ = col.gameObject.GetComponent<PlayerController>();
             Debug.Log("Player hitted");
@@ -52,6 +55,17 @@ public class BulletController : MonoBehaviour
 
         GameObject go_ = Instantiate<GameObject>(GameManager.instance.enemyExplosionParticles_, transform.position, transform.rotation);
         go_.GetComponentInChildren<ParticleSystem>().Play();
-        Destroy(this.gameObject,0.0f);
+
+        // Destroy(this.gameObject,1.0f);
+        Destroy(this.gameObject,0.1f);
     }
+
+    // public void AutoDestroyMySelf(){
+    //     Debug.Log("Destroying");
+    //     // if(gameObject != null){
+    //         // if(!gameObject.IsDestroyed()){
+    //             Destroy(gameObject,1.0f);
+    //         // }
+    //     // }
+    // }
 }

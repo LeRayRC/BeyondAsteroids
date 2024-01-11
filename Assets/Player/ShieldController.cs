@@ -14,6 +14,7 @@ public class ShieldController : MonoBehaviour, IDamageable
     void Start(){
         shield_active_ = false;
         shield_particles_ = GetComponent<ParticleSystem>();
+        UpdateShieldEmissionParticles();
         shield_particles_.Stop();
     }
 
@@ -23,6 +24,7 @@ public class ShieldController : MonoBehaviour, IDamageable
             GetComponent<Collider2D>().enabled = true;
         }else{
             GetComponent<Collider2D>().enabled = false;
+            
         }
     }
 
