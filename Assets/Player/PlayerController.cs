@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     public bool invencible_;
 
     public float force_;
+
+
     public ParticleSystem propulsion_;
     void Start(){
         shipTr_ = gameObject.GetComponent<Transform>();
@@ -55,7 +58,10 @@ public class PlayerController : MonoBehaviour, IDamageable
             // Debug.Log(forwardDir_);
             
             // rb_.AddForce(forwardDir_ * force_, ForceMode.VelocityChange);
-            shipTr_.position = Vector3.Lerp(shipTr_.position,new Vector3(worldPos_.x, worldPos_.y, shipTr_.position.z), 0.01f);
+            if(Vector3.Distance(worldPos_, shipTr_.position) > 0.1f){
+                shipTr_.transform.Translate(forwardDir_ * force_ * Time.deltaTime, Space.World);
+            }
+            // shipTr_.position = Vector3.Lerp(shipTr_.position,new Vector3(worldPos_.x, worldPos_.y, shipTr_.position.z), 0.01f);
             var emission = propulsion_.emission;
             // propulsion_.Play();
             emission.rateOverTime = 75.0f;

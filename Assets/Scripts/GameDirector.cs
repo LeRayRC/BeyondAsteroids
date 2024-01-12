@@ -203,6 +203,8 @@ public class GameDirector : MonoBehaviour
         ResetPhase(Phase2);
         ResetPhase(Phase3);
         ResetPhase(Phase4);
+        powerUpSpawned_ = false;
+        Phase4.bossSpawned_ = false;
     }
 }
 

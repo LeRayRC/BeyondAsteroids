@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EventSystems;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Splines;
 
 public class BossController : MonoBehaviour, IDamageable
